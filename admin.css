@@ -1,0 +1,65 @@
+body {
+    background: #020617;
+    color: white;
+    font-family: 'Burbank Big Condensed Black', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin: 30px 0;
+    color: #00E5ff;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #00e5ff, #6c3bff);
+    color: white;
+    cursor: pointer;
+}
+
+.player-admin {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+    padding: 10px;
+    background: #111;
+    border-radius: 8px;
+    cursor: grab;
+}
+
+.player-admin input {
+    width: 120px;
+    padding: 5px;
+}
+
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.botao-salvar {
+    margin-top: 20px;
+}
+
+.linha-admin {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
