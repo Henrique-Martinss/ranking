@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking XP</title>
+    <title>Ranking</title>
+
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/burbank-big-condensed-black">
+    <link href="https://fonts.cdnfonts.com/css/burbank-big-condensed" rel="stylesheet">
 </head>
+
 <body>
+
     <div class="imagem-fundo">
         <img src="img/imagem-fundo.webp" alt="Fundo">
     </div>
+
     <section class="hero">
-        <h1>🏆 RANKING LEVEL</h1>
-        <p>Top jogadores que mais farmaram XP essa semana</p>
+        <h1>🏆 RANKING</h1>
+        <p>Top jogadores que mais farmaram Level essa semana</p>
         <a href="#ranking" class="botao">Ver Ranking</a>
     </section>
 
@@ -23,17 +28,21 @@
         <div class="ranking-header">
             <span>#</span>
             <span>Jogador</span>
-            <span>XP</span>
-            <span>Variação</span>
+            <span>Level</span>
         </div>
 
         <div id="ranking-lista"></div>
         <p class="atualizacao" id="data"></p>
     </section>
-    
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <!-- Scripts -->
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
 
 </body>
-
-<script src="script.js"></script>
 
 </html>

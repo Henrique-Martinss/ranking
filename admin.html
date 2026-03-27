@@ -4,26 +4,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.cdnfonts.com/css/burbank-big-condensed-black" rel="stylesheet">
-    <link rel="stylesheet" href="admin.css">
     <title>Painel Admin</title>
+
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <h1>⚙️ Painel Admin - Ranking XP</h1>
+
+    <h1>⚙️ Painel Admin</h1>
+
     <div class="container">
+
         <form id="form">
-            <input id="nome" placeholder="Nome">
-            <input id="xp" type="number" placeholder="XP">
-            <button type="submit">Adicionar</button>
+            <fieldset>
+                <legend>Adicionar Jogador</legend>
+                <label for="nome">Nome do Jogador:</label>
+                <input id="nome" placeholder="Nome" required aria-label="Nome do Jogador">
+
+                <label for="level">Level do Jogador:</label>
+                <input type="number" id="level" placeholder="Level do jogador" required aria-label="Level do Jogador">
+
+                <button type="submit">Adicionar</button>
+            </fieldset>
         </form>
 
-        <input type="date" id="dataAtualizacao">
+        <label for="dataAtualizacao">Data da Última Atualização:</label>
+        <input type="date" id="dataAtualizacao" aria-label="Data da Última Atualização">
 
         <div id="lista-admin"></div>
+
     </div>
 
+    <button type="button" id="logoutBtn">Sair</button>
+
+        <!-- Firebase SDKs (Versão COMPAT para funcionar com seu código atual) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+    <!-- Seu script de configuração do Firebase -->
+    <script src="firebase.js"></script>
+    
+    <!-- Seu script principal do Painel Admin -->
     <script src="admin.js"></script>
+
+
 </body>
 
 </html>
