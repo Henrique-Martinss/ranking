@@ -1,13 +1,20 @@
 // ===============================
-// 🔒 PROTEÇÃO (ATENÇÃO: ESTA É UMA PROTEÇÃO BÁSICA CLIENT-SIDE)
+// 🔒 PROTEÇÃO REAL (FIREBASE AUTH)
 // ===============================
-// Para um painel administrativo real, é ALTAMENTE RECOMENDADO implementar
-// um sistema de autenticação robusto no lado do servidor, como o Firebase Authentication,
-// para garantir a segurança dos dados e evitar acessos não autorizados.
-// A verificação via localStorage é facilmente contornável.
-if (localStorage.getItem("auth") !== "true") {
-    window.location.href = "login.html";
-}
+firebase.auth().onAuthStateChanged((user) => {
+    if (!user) {
+        // Se não houver usuário logado, manda para o login
+        window.location.href = "login.html";
+    } else {
+        console.log("Logado como:", user.email);
+        // Aqui você pode adicionar uma verificação extra de e-mail se quiser
+        // if (user.email !== "seu-email@exemplo.com") { window.location.href = "login.html"; }
+    }
+});
+
+// O restante do seu código (db.ref, render, salvar, etc.) continua igual abaixo...
+// Apenas certifique-se de que o logoutBtn use firebase.auth().signOut()
+
 
 // ===============================
 // FIREBASE
@@ -262,11 +269,9 @@ if (inputData) {
 // ===============================
 // LOGOUT
 // ===============================
-if (logoutBtn) {
-    logoutBtn.addEventListener("click", () => {
-        if (!confirm("Deseja sair do painel administrativo?")) return;
-
-        localStorage.removeItem("auth");
+logoutBtn.addEventListener("click", () => {
+    if (!confirm("Deseja sair?")) return;
+    firebase.auth().signOut().then(() => {
         window.location.href = "login.html";
     });
-}
+});

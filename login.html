@@ -1,249 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Administrativo</title>
-
-    <!-- Fontes -->
-    <link href="https://fonts.cdnfonts.com/css/burbank-big-condensed-black" rel="stylesheet">
-
+    <title>Login Administrativo Seguro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
     <style>
-        /* ===============================
-           GLOBAL STYLES
-           =============================== */
-        body {
-            background: #0f172a; /* Fundo escuro */
-            color: #e2e8f0; /* Cor de texto suave */
-            display: flex;
-            min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
-            justify-content: center;
-            align-items: center;
-            font-family: 'Burbank Big Condensed Black', sans-serif;
-            margin: 0;
-            padding: 20px; /* Padding para telas menores */
-            box-sizing: border-box;
-        }
-
-        /* ===============================
-           LOGIN BOX STYLES
-           =============================== */
-        .login-box {
-            background: #1a202c; /* Fundo mais escuro para a caixa de login */
-            padding: 40px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 380px; /* Largura máxima para a caixa de login */
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-            border: 1px solid #00e5ff; /* Borda sutil */
-        }
-
-        h2 {
-            color: #00E5ff;
-            margin-bottom: 30px;
-            font-size: 2.2em;
-            text-shadow: 1px 1px 3px rgba(0, 229, 255, 0.3);
-        }
-
-        /* ===============================
-           FORM STYLES
-           =============================== */
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        label {
-            display: block;
-            text-align: left;
-            margin-bottom: 5px;
-            color: #a0aec0;
-            font-size: 0.9em;
-        }
-
-        input[type="text"],
-        input[type="password"] {
-            width: calc(100% - 24px); /* Ajuste para padding e borda */
-            margin: 0;
-            padding: 12px;
-            border: 1px solid #4a5568;
-            border-radius: 6px;
-            background: #2d3748;
-            color: #e2e8f0;
-            font-size: 1em;
-            box-sizing: border-box;
-        }
-
-        input[type="text"]:focus,
-        input[type="password"]:focus {
-            outline: none;
-            border-color: #00e5ff;
-            box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.3);
-        }
-
-        /* ===============================
-           BUTTON STYLES
-           =============================== */
-        button {
-            width: 100%;
-            padding: 12px 25px;
-            margin-top: 20px;
-            border-radius: 8px;
-            border: none;
-            background: linear-gradient(135deg, #00e5ff, #6c3bff);
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        button:hover {
-            background: linear-gradient(135deg, #6c3bff, #00e5ff);
-            box-shadow: 0 5px 15px rgba(0, 229, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        button:active {
-            transform: translateY(0);
-            box-shadow: none;
-        }
-
-        /* ===============================
-           MESSAGE STYLES
-           =============================== */
-        #message {
-            color: #ff4d4d; /* Cor para mensagens de erro */
-            margin-top: 15px;
-            font-size: 0.9em;
-            min-height: 1.2em; /* Para evitar que o layout salte */
-        }
-
-        /* ===============================
-           RESPONSIVENESS
-           =============================== */
-        @media (max-width: 480px) {
-            .login-box {
-                padding: 30px 20px;
-                margin: 0 10px;
-            }
-
-            h2 {
-                font-size: 1.8em;
-            }
-
-            button {
-                padding: 10px 20px;
-                font-size: 1em;
-            }
-        }
+        body { background: #0f172a; color: #e2e8f0; display: flex; min-height: 100vh; justify-content: center; align-items: center; font-family: 'Luckiest Guy', cursive; margin: 0; padding: 20px; }
+        .login-box { background: #1a202c; padding: 40px; border-radius: 12px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4 ); border: 1px solid #00e5ff; }
+        h2 { color: #00E5ff; margin-bottom: 30px; font-size: 2.2em; }
+        form { display: flex; flex-direction: column; gap: 15px; }
+        input { width: 100%; padding: 12px; border: 1px solid #4a5568; border-radius: 6px; background: #2d3748; color: #e2e8f0; font-size: 1em; box-sizing: border-box; font-family: sans-serif; }
+        button { width: 100%; padding: 12px; margin-top: 20px; border-radius: 8px; border: none; background: linear-gradient(135deg, #00e5ff, #6c3bff); color: white; font-size: 1.1em; cursor: pointer; font-family: 'Luckiest Guy', cursive; }
+        #message { color: #ff4d4d; margin-top: 15px; font-size: 0.9em; font-family: sans-serif; }
     </style>
 </head>
-
 <body>
-
     <div class="login-box">
         <h2>Admin Login</h2>
         <form id="loginForm">
-            <label for="user">Usuário:</label>
-            <input type="text" id="user" placeholder="Nome de usuário" required aria-label="Nome de usuário">
-
-            <label for="pass">Senha:</label>
-            <input type="password" id="pass" placeholder="Sua senha" required aria-label="Sua senha">
-
-            <button id="loginBtn" type="submit">Entrar</button>
+            <input type="email" id="email" placeholder="Seu e-mail" required>
+            <input type="password" id="pass" placeholder="Sua senha" required>
+            <button type="submit">Entrar</button>
         </form>
-        <p id="message"></p> <!-- Para exibir mensagens de erro/sucesso -->
+        <p id="message"></p>
     </div>
 
-    <script>
-        // ===============================
-        // ⚠️ AVISO DE SEGURANÇA CRÍTICO ⚠️
-        // ===============================
-        // As credenciais de login (usuário e senha) estão HARDCODED neste script
-        // e a autenticação é feita APENAS no lado do cliente (browser).
-        // ESTA ABORDAGEM É EXTREMAMENTE INSEGURA E NÃO DEVE SER USADA EM PRODUÇÃO.
-        // Qualquer pessoa com conhecimento básico pode facilmente ver e modificar
-        // este código para obter acesso.
-        //
-        // Para um sistema seguro, você DEVE implementar um sistema de autenticação
-        // robusto no lado do servidor, como:
-        // - Firebase Authentication (recomendado para integração com Firebase Database)
-        // - Um backend próprio com JWT (JSON Web Tokens) ou sessões seguras.
-        //
-        // Esta implementação é APENAS para fins de demonstração ou prototipagem local.
+    <!-- Firebase SDKs (Versão Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="firebase.js"></script>
 
-        const loginForm = document.getElementById("loginForm");
-        const userField = document.getElementById("user");
-        const passField = document.getElementById("pass");
-        const loginBtn = document.getElementById("loginBtn");
+    <script>
+        const loginForm = document.getElementById("loginForm" );
         const messageElement = document.getElementById("message");
 
-        // Verifica se os elementos essenciais foram encontrados
-        if (!loginForm || !userField || !passField || !loginBtn || !messageElement) {
-            console.error("Erro: Um ou mais elementos DOM essenciais para o login não foram encontrados. Verifique os IDs no HTML.");
-            if (messageElement) {
-                messageElement.textContent = "Erro interno: Componentes de login ausentes.";
-            }
-        }
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const pass = document.getElementById("pass").value;
 
-        // Função para exibir mensagens ao usuário
-        function showMessage(msg, isError = true) {
-            if (messageElement) {
-                messageElement.textContent = msg;
-                messageElement.style.color = isError ? '#ff4d4d' : '#4CAF50'; // Vermelho para erro, verde para sucesso (se aplicável)
-            }
-        }
+            messageElement.textContent = "Autenticando...";
 
-        // Função de login
-        function login(event) {
-            // Previne o comportamento padrão de submit do formulário (recarregar a página)
-            if (event) event.preventDefault();
-
-            const user = userField.value.trim();
-            const pass = passField.value.trim();
-
-            if (!user || !pass) {
-                showMessage("Por favor, preencha todos os campos.");
-                return;
-            }
-
-            // 🔒 Lógica de login simples (INSEGURA para produção)
-            if (user === "admin" && pass === "1234") {
-                localStorage.setItem("auth", "true");
-                showMessage("Login bem-sucedido! Redirecionando...", false);
-                window.location.href = "admin.html";
-            } else {
-                showMessage("Usuário ou senha inválidos.");
-                // Limpa o campo da senha para segurança
-                passField.value = '';
-                passField.focus(); // Coloca o foco de volta no campo da senha
-            }
-        }
-
-        // Event Listener para o botão de login
-        if (loginBtn) {
-            loginBtn.addEventListener("click", login);
-        }
-
-        // Event Listener para o submit do formulário (inclui Enter key)
-        if (loginForm) {
-            loginForm.addEventListener("submit", login);
-        }
-
-        // Opcional: Focar no campo de usuário ao carregar a página
-        window.addEventListener("load", () => {
-            if (userField) {
-                userField.focus();
-            }
+            firebase.auth().signInWithEmailAndPassword(email, pass)
+                .then(() => {
+                    window.location.href = "admin.html";
+                })
+                .catch((error) => {
+                    messageElement.textContent = "Erro: " + error.message;
+                });
         });
     </script>
-
 </body>
-
 </html>

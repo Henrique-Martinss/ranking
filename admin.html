@@ -38,15 +38,20 @@
 
     <button type="button" id="logoutBtn">Sair</button>
 
-        <!-- Firebase SDKs (Versão COMPAT para funcionar com seu código atual) -->
+            <!-- Firebase SDKs (Versão COMPAT) -->
+    <!-- 1. O 'coração' do Firebase -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    
+    <!-- 2. O módulo de LOGIN (O que você está adicionando agora ) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    
+    <!-- 3. O módulo de BANCO DE DADOS -->
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-    <!-- Seu script de configuração do Firebase -->
+    <!-- Seus scripts personalizados -->
     <script src="firebase.js"></script>
-    
-    <!-- Seu script principal do Painel Admin -->
     <script src="admin.js"></script>
+
 
 
 </body>
