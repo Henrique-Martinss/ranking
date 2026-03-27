@@ -81,10 +81,10 @@ body {
     grid-template-columns: 1fr 3fr 2fr 1fr;
     padding: 15px;
     margin-bottom: 10px;
-    background: rgba(255, 255, 255, 0.05); /* corrigido */
+    background: rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px); /* compatibilidade */
+    -webkit-backdrop-filter: blur(5px);
     align-items: center;
     transition: 0.3s;
 }
