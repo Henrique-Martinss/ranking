@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XP ARENA — Ranking Fortnite</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Barlow+Condensed:wght@400;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Firebase SDKs (v9 compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+  <!-- LOADING -->
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-text">CARREGANDO...</div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast"></div>
+
+  <!-- ══ HEADER ══ -->
+  <header class="site-header">
+    <div class="logo">XP<em>ARENA</em></div>
+    <div class="header-right">
+      <button id="btn-admin-nav">⚙ ADMIN</button>
+      <button id="btn-logout-nav" class="hidden">SAIR</button>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       PÁGINA: RANKING PÚBLICO
+  ══════════════════════════════════════════ -->
+  <div id="page-ranking" class="page">
+
+    <section class="hero">
+      <div class="live-badge"><span class="live-dot"></span>AO VIVO</div>
+      <h1>RANKING SEMANAL<span class="line2">XP MAP</span></h1>
+      <p class="hero-sub">Quem pegou mais levels essa semana?</p>
+    </section>
+
+    <div class="week-bar">
+      <span>SEMANA: <strong id="lbl-week">—</strong></span>
+      <span>•</span>
+      <span>MAPA: <strong id="lbl-map">—</strong></span>
+    </div>
+
+    <div class="podium-wrap">
+      <div class="podium" id="podium-container"></div>
+    </div>
+
+    <div class="rank-wrap">
+      <p class="sec-label">Classificação completa</p>
+      <div id="rank-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PÁGINA: LOGIN
+  ══════════════════════════════════════════ -->
+  <!-- CORREÇÃO: removido display:flex daqui, o CSS cuida disso apenas quando não tem .hidden -->
+  <div id="page-login" class="page hidden">
+    <div class="login-card">
+      <div class="login-title">Acesso Admin</div>
+      <div class="login-sub">Entre com suas credenciais</div>
+
+      <div id="login-error" class="login-error hidden"></div>
+
+      <div class="field">
+        <label for="inp-email">Email</label>
+        <input type="email" id="inp-email" placeholder="admin@email.com" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label for="inp-pass">Senha</label>
+        <input type="password" id="inp-pass" placeholder="••••••••" autocomplete="current-password" />
+      </div>
+
+      <button class="btn btn-primary" id="btn-login" style="width:100%;margin-top:8px">ENTRAR</button>
+      <button id="btn-back-ranking">← Voltar ao ranking</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       PÁGINA: ADMIN
+  ══════════════════════════════════════════ -->
+  <div id="page-admin" class="page hidden">
+
+    <div class="admin-header">
+      <div>
+        <div class="admin-title">PAINEL ADMIN</div>
+        <div class="admin-sub">Gerencie jogadores e níveis da semana</div>
+      </div>
+      <button class="btn-reset-week" id="btn-reset-week">🗑 ZERAR SEMANA</button>
+    </div>
+
+    <!-- Config semana -->
+    <div class="config-box">
+      <div class="config-box-title">⚡ CONFIGURAÇÃO DA SEMANA</div>
+      <div class="config-row">
+        <div class="field" style="margin:0">
+          <label for="inp-week-name">Nome da semana</label>
+          <input type="text" id="inp-week-name" placeholder="Ex: Semana 1 — Abril" />
+        </div>
+        <div class="field" style="margin:0">
+          <label for="inp-map-name">Nome do mapa</label>
+          <input type="text" id="inp-map-name" placeholder="Ex: Mapa XP #7" />
+        </div>
+        <button class="btn btn-hot" id="btn-save-config">SALVAR</button>
+      </div>
+    </div>
+
+    <!-- Adicionar jogador -->
+    <div class="add-box">
+      <div class="add-box-title">＋ ADICIONAR JOGADOR</div>
+      <div class="add-row">
+        <div class="field" style="margin:0">
+          <label for="inp-new-name">Nome do jogador</label>
+          <input type="text" id="inp-new-name" placeholder="NomeDoJogador" />
+        </div>
+        <div class="field" style="margin:0">
+          <label for="inp-new-levels">Níveis ganhos</label>
+          <input type="number" id="inp-new-levels" placeholder="0" min="0" />
+        </div>
+        <button class="btn btn-primary" id="btn-add-player">ADICIONAR</button>
+      </div>
+    </div>
+
+    <!-- Tabela jogadores -->
+    <div class="players-box">
+      <div class="players-box-header">
+        <div class="players-box-title">JOGADORES CADASTRADOS</div>
+        <div class="player-count" id="player-count">0 jogadores</div>
+      </div>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Jogador</th>
+            <th>Níveis</th>
+            <th>Adicionado em</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="admin-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ MODAL EDIÇÃO ══ -->
+  <div id="modal-edit" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-title">✏ EDITAR JOGADOR</div>
+      <input type="hidden" id="edit-id" />
+      <div class="field">
+        <label for="edit-name">Nome do jogador</label>
+        <input type="text" id="edit-name" />
+      </div>
+      <div class="field">
+        <label for="edit-levels">Níveis ganhos</label>
+        <input type="number" id="edit-levels" min="0" />
+      </div>
+      <div class="modal-btns">
+        <button class="btn btn-primary" id="btn-save-edit" style="flex:1">SALVAR</button>
+        <button class="btn btn-ghost" id="btn-cancel-edit" style="flex:1">CANCELAR</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
